@@ -1,0 +1,77 @@
+.btn {
+  position: fixed;
+  right: max(1.1rem, env(safe-area-inset-right));
+  bottom: max(1.1rem, env(safe-area-inset-bottom));
+  z-index: 30;
+  display: grid;
+  place-items: center;
+  width: 2.65rem;
+  height: 2.65rem;
+  padding: 0;
+  border: 1.5px solid #c4a074;
+  border-radius: 999px;
+  background: #fff8ec;
+  color: #5c3a20;
+  box-shadow: 0 0.14em 0.32em rgba(92, 58, 32, 0.14);
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(0.45em) scale(0.92);
+  pointer-events: none;
+  transition:
+    opacity 0.32s ease,
+    transform 0.32s ease,
+    box-shadow 0.28s ease,
+    background 0.28s ease;
+}
+
+.btn svg {
+  width: 1.15rem;
+  height: 1.15rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.85;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.show {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+.btn:hover,
+.btn:focus-visible {
+  background: #fde3d8;
+  color: #e07870;
+  transform: translateY(-0.16em) scale(1.06);
+  box-shadow: 0 0.28em 0.55em rgba(92, 58, 32, 0.16);
+}
+
+.btn:focus-visible {
+  outline: 2px solid #c4a574;
+  outline-offset: 3px;
+}
+
+@media (max-width: 720px) {
+  .btn {
+    right: max(0.85rem, env(safe-area-inset-right));
+    bottom: max(0.85rem, env(safe-area-inset-bottom));
+    width: 2.4rem;
+    height: 2.4rem;
+  }
+
+  .btn svg {
+    width: 1.05rem;
+    height: 1.05rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn,
+  .btn:hover,
+  .btn:focus-visible {
+    transition: none;
+    transform: none;
+  }
+}

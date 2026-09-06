@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local working originals (the site serves public/images)
+/visuals-images/*
+!/visuals-images/ref.png
