@@ -1150,7 +1150,7 @@
   }
 }
 
-@media (max-width: 720px) {
+@media (max-width: 1024px), (max-width: 1366px) and (hover: none) and (pointer: coarse) {
   .wrap {
     width: 100%;
     max-width: 100%;
@@ -1198,15 +1198,15 @@
 
   .girl {
     margin-top: 0;
-    width: 100%;
+    width: min(100%, calc(49vh * 1024 / 1536));
+    width: min(100%, calc(49dvh * 1024 / 1536));
   }
 
   .girlBody {
+    display: block;
     width: 100%;
     height: auto;
-    max-height: 49dvh;
-    object-fit: contain;
-    object-position: left bottom;
+    max-height: none;
   }
 
   .welcomeBubble {
@@ -1456,9 +1456,13 @@
     transform: none;
   }
 
+  .browseOpen .girl {
+    width: min(100%, calc(17.5vh * 1024 / 1536));
+    width: min(100%, calc(17.5dvh * 1024 / 1536));
+  }
+
   .browseOpen .girlBody {
-    max-height: 17.5dvh;
-    object-position: center bottom;
+    max-height: none;
   }
 
   .browseOpen .panel {
@@ -1575,8 +1579,13 @@
     max-height: 45dvh;
   }
 
+  .girl {
+    width: min(100%, calc(45vh * 1024 / 1536));
+    width: min(100%, calc(45dvh * 1024 / 1536));
+  }
+
   .girlBody {
-    max-height: 45dvh;
+    max-height: none;
   }
 
   .cardRow {
@@ -1616,8 +1625,13 @@
     max-height: 16dvh;
   }
 
+  .browseOpen .girl {
+    width: min(100%, calc(16vh * 1024 / 1536));
+    width: min(100%, calc(16dvh * 1024 / 1536));
+  }
+
   .browseOpen .girlBody {
-    max-height: 16dvh;
+    max-height: none;
   }
 
   .browseOpen .panel {
@@ -1683,7 +1697,8 @@
   }
 }
 
-@media (max-width: 720px) and (prefers-reduced-motion: reduce) {
+@media (max-width: 1024px) and (prefers-reduced-motion: reduce),
+  (max-width: 1366px) and (hover: none) and (pointer: coarse) and (prefers-reduced-motion: reduce) {
   .siteBubble {
     transform: none;
   }
