@@ -53,7 +53,7 @@ const PANELS: Record<PanelKind, { title: string; sub: string; backTo: string }> 
 const WELCOME = "Welcome!\nFind something\nbeautiful today ♡";
 
 const MOBILE_SHOP_MQ =
-  "(max-width: 1024px), (max-width: 1366px) and (hover: none) and (pointer: coarse)";
+  "(max-width: 720px), (max-width: 1400px) and (orientation: portrait)";
 
 function clearCompanionShift(slot: HTMLElement, bubble: HTMLElement) {
   slot.style.left = "";

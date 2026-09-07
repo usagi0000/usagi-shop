@@ -1150,7 +1150,7 @@
   }
 }
 
-@media (max-width: 1024px), (max-width: 1366px) and (hover: none) and (pointer: coarse) {
+@media (max-width: 720px), (max-width: 1400px) and (orientation: portrait) {
   .wrap {
     width: 100%;
     max-width: 100%;
@@ -1707,8 +1707,8 @@
   }
 }
 
-@media (max-width: 1024px) and (prefers-reduced-motion: reduce),
-  (max-width: 1366px) and (hover: none) and (pointer: coarse) and (prefers-reduced-motion: reduce) {
+@media (max-width: 720px) and (prefers-reduced-motion: reduce),
+  (max-width: 1400px) and (orientation: portrait) and (prefers-reduced-motion: reduce) {
   .siteBubble {
     transform: none;
   }
