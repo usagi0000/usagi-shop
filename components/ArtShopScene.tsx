@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties } from "react";
 import { formatPrice, getCollection, productImages, products, type Product } from "@/lib/data";
 import { useCart } from "@/lib/cart";
 import { Leaf, Sparkle } from "./Icons";
@@ -51,6 +51,83 @@ const PANELS: Record<PanelKind, { title: string; sub: string; backTo: string }> 
 };
 
 const WELCOME = "Welcome!\nFind something\nbeautiful today ♡";
+
+const MOBILE_SHOP_MQ =
+  "(max-width: 1024px), (max-width: 1366px) and (hover: none) and (pointer: coarse)";
+
+function clearCompanionShift(slot: HTMLElement, bubble: HTMLElement) {
+  slot.style.left = "";
+  slot.style.bottom = "";
+  bubble.style.left = "";
+  bubble.style.right = "";
+  bubble.style.top = "";
+  bubble.style.bottom = "";
+}
+
+function placeMobileCompanion(
+  wrap: HTMLElement,
+  slot: HTMLElement,
+  girl: HTMLElement,
+  cards: HTMLElement,
+  bubble: HTMLElement,
+) {
+  clearCompanionShift(slot, bubble);
+
+  const wrapR = wrap.getBoundingClientRect();
+  const girl0 = girl.getBoundingClientRect();
+  const cardsR = cards.getBoundingClientRect();
+  const bubble0 = bubble.getBoundingClientRect();
+
+  const head = {
+    left: girl0.left + girl0.width * 0.3,
+    right: girl0.left + girl0.width * 0.68,
+    top: girl0.top,
+  };
+  const overlapX = Math.min(head.right, cardsR.right) - Math.max(head.left, cardsR.left);
+  const gapY = head.top - cardsR.bottom;
+  const gap = 12;
+  const edge = 8;
+
+  if (overlapX > 0 && gapY < gap) {
+    const shiftLeft = head.right - cardsR.left + gap;
+    const maxLeft = head.left - wrapR.left - edge;
+    if (shiftLeft <= maxLeft) {
+      slot.style.left = `${girl0.left - wrapR.left - shiftLeft}px`;
+    }
+  }
+
+  const girlMid = girl.getBoundingClientRect();
+  const head2 = {
+    left: girlMid.left + girlMid.width * 0.3,
+    right: girlMid.left + girlMid.width * 0.68,
+    top: girlMid.top,
+  };
+  const overlapX2 = Math.min(head2.right, cardsR.right) - Math.max(head2.left, cardsR.left);
+  const gapY2 = head2.top - cardsR.bottom;
+  if (overlapX2 > 0 && gapY2 < gap) {
+    const curBottom = wrapR.bottom - girlMid.bottom;
+    slot.style.bottom = `${Math.max(edge, curBottom - (gap - gapY2))}px`;
+  }
+
+  const tablet = wrapR.width >= 700;
+  if (tablet) {
+    const g = girl.getBoundingClientRect();
+    const wantLeft = -g.width * 0.1;
+    if (g.left - wrapR.left > wantLeft) {
+      slot.style.left = `${wantLeft}px`;
+    }
+  }
+
+  const girl1 = girl.getBoundingClientRect();
+  const dx = girl1.left - girl0.left;
+  const dy = girl1.top - girl0.top;
+  bubble.style.left = tablet
+    ? `${girl1.left - wrapR.left + girl1.width * 0.56}px`
+    : `${bubble0.left - wrapR.left + dx}px`;
+  bubble.style.bottom = `${wrapR.bottom - bubble0.bottom - dy}px`;
+  bubble.style.right = "auto";
+  bubble.style.top = "auto";
+}
 
 function wait(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -312,6 +389,11 @@ export function ArtShopScene({ adamIcons }: { adamIcons: string[] }) {
   const gridFaceRef = useRef<HTMLDivElement>(null);
   const gridScroll = useRef(0);
   const detailBackRef = useRef<HTMLButtonElement>(null);
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const girlSlotRef = useRef<HTMLDivElement>(null);
+  const girlRef = useRef<HTMLDivElement>(null);
+  const cardRowRef = useRef<HTMLDivElement>(null);
+  const bubbleRef = useRef<HTMLParagraphElement>(null);
 
   function toggleLoved(id: string) {
     setLoved((prev) => {
@@ -421,6 +503,43 @@ export function ArtShopScene({ adamIcons }: { adamIcons: string[] }) {
     };
   }, []);
 
+  useLayoutEffect(() => {
+    const wrap = wrapRef.current;
+    const slot = girlSlotRef.current;
+    const girl = girlRef.current;
+    const cards = cardRowRef.current;
+    const bubble = bubbleRef.current;
+    if (!wrap || !slot || !girl || !cards || !bubble) return;
+
+    const mq = window.matchMedia(MOBILE_SHOP_MQ);
+
+    const place = () => {
+      if (panelOpen || !mq.matches) {
+        clearCompanionShift(slot, bubble);
+        return;
+      }
+      placeMobileCompanion(wrap, slot, girl, cards, bubble);
+    };
+
+    place();
+    const img = girl.querySelector("img");
+    img?.addEventListener("load", place);
+    mq.addEventListener("change", place);
+    window.addEventListener("resize", place);
+    window.visualViewport?.addEventListener("resize", place);
+    const ro = new ResizeObserver(place);
+    ro.observe(wrap);
+
+    return () => {
+      img?.removeEventListener("load", place);
+      mq.removeEventListener("change", place);
+      window.removeEventListener("resize", place);
+      window.visualViewport?.removeEventListener("resize", place);
+      ro.disconnect();
+      clearCompanionShift(slot, bubble);
+    };
+  }, [panelOpen]);
+
   useEffect(() => {
     if (!panelOpen) return;
     const onKey = (event: KeyboardEvent) => {
@@ -443,7 +562,10 @@ export function ArtShopScene({ adamIcons }: { adamIcons: string[] }) {
 
   return (
     <div className={styles.stage}>
-      <div className={`${styles.wrap} ${panelOpen ? styles.browseOpen : ""}`}>
+      <div
+        ref={wrapRef}
+        className={`${styles.wrap} ${panelOpen ? styles.browseOpen : ""}`}
+      >
       <Image
         src="/images/art-shop.png"
         alt="Art Shop stall"
@@ -456,8 +578,8 @@ export function ArtShopScene({ adamIcons }: { adamIcons: string[] }) {
       />
       <div className={styles.shopDim} aria-hidden />
 
-      <div className={styles.girlSlot}>
-        <div className={styles.girl}>
+      <div ref={girlSlotRef} className={styles.girlSlot}>
+        <div ref={girlRef} className={styles.girl}>
           <Image
             src="/images/girlNoEyese2.png"
             alt=""
@@ -493,6 +615,7 @@ export function ArtShopScene({ adamIcons }: { adamIcons: string[] }) {
       </div>
 
       <p
+        ref={bubbleRef}
         className={`${styles.welcomeBubble} ${typedDone ? styles.welcomeFloat : ""} ${panelOpen ? styles.welcomeHidden : ""}`}
         aria-live="polite"
       >
@@ -507,7 +630,7 @@ export function ArtShopScene({ adamIcons }: { adamIcons: string[] }) {
         <span className={styles.welcomeTail} aria-hidden />
       </p>
 
-      <div className={`${styles.cardRow} ${panelOpen ? styles.cardRowHidden : ""}`}>
+      <div ref={cardRowRef} className={`${styles.cardRow} ${panelOpen ? styles.cardRowHidden : ""}`}>
         <button
           type="button"
           className={`${styles.catCard} ${styles.canvaTilt}`}

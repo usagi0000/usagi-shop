@@ -1231,6 +1231,16 @@
     transform: rotate(134deg);
   }
 
+  @media (min-width: 700px) {
+    .girlSlot {
+      left: 0;
+    }
+
+    .welcomeBubble {
+      left: 24%;
+    }
+  }
+
   .cardRow {
     left: 50%;
     right: auto;
