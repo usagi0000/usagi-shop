@@ -7,6 +7,7 @@ import { formatPrice, productHref, searchProducts, shopCatalog } from "@/lib/dat
 import { useCart } from "@/lib/cart";
 import { BagIcon, SearchIcon, UserIcon } from "./Icons";
 import { Logo } from "./Logo";
+import { scrollToPageTop } from "@/lib/scroll-top";
 
 const NAV = [
   { href: "/", label: "Home" },
@@ -26,7 +27,7 @@ export function Header() {
       <header className="fixed inset-x-0 top-0 z-40">
         <div className="header-scallop bg-cream text-ink">
           <div className="mx-auto flex max-w-page items-center justify-between gap-3 px-4 py-3 md:px-8">
-            <Link href="/" className="flex items-center gap-2 shrink-0">
+            <Link href="/" scroll={false} onClick={scrollToPageTop} className="flex items-center gap-2 shrink-0">
               <Logo className="h-12 w-auto" preload />
               <span className="leading-tight">
                 <span className="block font-display text-xl font-bold tracking-tight text-ink">
@@ -43,6 +44,8 @@ export function Header() {
                   <Link
                     key={item.href}
                     href={item.href}
+                    scroll={item.href === "/" ? false : undefined}
+                    onClick={item.href === "/" ? scrollToPageTop : undefined}
                     className={`text-[15px] font-semibold transition-colors ${
                       active ? "text-pink-deep" : "text-ink hover:text-pink-deep"
                     }`}
@@ -93,7 +96,11 @@ export function Header() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  onClick={() => setOpen(false)}
+                  scroll={item.href === "/" ? false : undefined}
+                  onClick={() => {
+                    if (item.href === "/") scrollToPageTop();
+                    setOpen(false);
+                  }}
                   className="rounded-xl px-3 py-2 font-semibold hover:bg-cream-2"
                 >
                   {item.label}

@@ -1,8 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 
-export function ShareButton() {
+export function ShareButton({
+  className = "flex flex-col items-center gap-1 text-center text-[11px] font-semibold text-[#2b4a6b]",
+  iconClassName = "flex h-10 w-10 items-center justify-center rounded-full border border-blue-deep/40 bg-white",
+  icon = "↗",
+}: {
+  className?: string;
+  iconClassName?: string;
+  icon?: ReactNode;
+}) {
   const [copied, setCopied] = useState(false);
 
   async function share() {
@@ -34,11 +42,9 @@ export function ShareButton() {
       type="button"
       onClick={() => void share()}
       aria-label="Share with friends"
-      className="flex flex-col items-center gap-1 text-center text-[11px] font-semibold text-[#2b4a6b]"
+      className={className}
     >
-      <span className="flex h-10 w-10 items-center justify-center rounded-full border border-blue-deep/40 bg-white">
-        ↗
-      </span>
+      <span className={iconClassName}>{icon}</span>
       {copied ? "Copied" : "Share"}
     </button>
   );

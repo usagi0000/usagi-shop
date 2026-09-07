@@ -69,6 +69,14 @@ export function WriteForm({ needPassword }: { needPassword: boolean }) {
           className="rounded-2xl border border-line bg-white px-3 py-2 font-normal"
         />
       </label>
+      <label className="grid gap-1 text-sm font-semibold">
+        Image path <span className="font-normal text-ink-soft">(optional)</span>
+        <input
+          name="image"
+          placeholder="/images/blog/my-drawing.jpg"
+          className="rounded-2xl border border-line bg-white px-3 py-2 font-normal"
+        />
+      </label>
       {error ? <p className="text-sm font-semibold text-pink-deep">{error}</p> : null}
       <button
         type="submit"

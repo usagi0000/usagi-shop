@@ -7,7 +7,10 @@ export type BlogPost = {
   date: string;
   excerpt: string;
   body: string;
+  image?: string;
 };
+
+export type BlogPreview = Pick<BlogPost, "slug" | "title" | "date" | "excerpt" | "image">;
 
 const DIR = path.join(process.cwd(), "content", "blog");
 

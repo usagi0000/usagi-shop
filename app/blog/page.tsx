@@ -1,35 +1,23 @@
-import { PageShell } from "@/components/PageShell";
-import { formatBlogDate, listPosts } from "@/lib/blog";
+import { JourneyGallery } from "@/components/JourneyGallery";
 import type { Metadata } from "next";
-import Link from "next/link";
 
 export const metadata: Metadata = { title: "Blog" };
 
-export default async function BlogPage() {
-  const posts = await listPosts();
-
+export default function BlogPage() {
   return (
-    <PageShell title="Studio notes" kicker="Blog" center>
-      <p className="mb-6">
-        <Link href="/blog/write" className="text-sm font-semibold text-pink-deep hover:underline">
-          Write a note →
-        </Link>
-      </p>
-      {posts.length === 0 ? (
-        <p className="text-ink-soft">No notes yet. Write the first one.</p>
-      ) : (
-        <ul className="grid w-full max-w-2xl gap-4 text-left">
-          {posts.map((post) => (
-            <li key={post.slug} className="rounded-[22px] border border-line bg-card p-5">
-              <p className="text-xs text-ink-soft">{formatBlogDate(post.date)}</p>
-              <Link href={`/blog/${post.slug}`} className="font-display text-xl font-bold hover:text-pink-deep">
-                {post.title}
-              </Link>
-              <p className="mt-1 text-sm text-ink-soft">{post.excerpt}</p>
-            </li>
-          ))}
-        </ul>
-      )}
-    </PageShell>
+    <div className="mx-auto max-w-page overflow-x-hidden px-4 py-8 md:px-8 md:py-10">
+      <header className="max-w-2xl">
+        <h1 className="font-display text-3xl font-bold text-ink md:text-4xl">Blog</h1>
+        <p className="mt-3 leading-relaxed text-ink-soft">
+          A little collection of the drawings, characters and paintings that have been part of my artistic journey.
+        </p>
+        <p className="mt-4 max-w-xl text-sm leading-relaxed text-ink-soft">
+          From pencil sketches and manga-inspired drawings to colorful marker illustrations and painted scenes, these
+          artworks capture different moments of my journey as an artist.
+        </p>
+        <p className="mt-3 font-script text-xl text-pink-deep">draw • create • imagine ♡</p>
+      </header>
+      <JourneyGallery />
+    </div>
   );
 }

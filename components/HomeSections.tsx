@@ -1,6 +1,7 @@
 import { Leaf, Sparkle } from "./Icons";
 import { ProductCard } from "./ProductCard";
 import { ShareButton } from "./ShareButton";
+import { HomeWelcomeMobile } from "./HomeWelcomeMobile";
 import { collections, products } from "@/lib/data";
 import Link from "next/link";
 import Image from "next/image";
@@ -106,9 +107,12 @@ export function HomeSections() {
       </section>
 
       <section className="relative mt-10">
-        <div className="h-16 sm:h-24 md:h-32" aria-hidden />
-        <div className="relative rounded-[28px] border border-blue-deep/25 bg-blue">
-          <div className="grid items-center gap-4 py-6 pr-36 pl-6 sm:pr-44 md:grid-cols-2 md:py-8 md:pr-56 md:pl-8 lg:pr-64">
+        <div className="hidden md:block md:h-32" aria-hidden />
+        <div className="relative overflow-x-clip rounded-[28px] border border-blue-deep/25 bg-blue md:overflow-visible">
+          <div className="md:hidden">
+            <HomeWelcomeMobile />
+          </div>
+          <div className="hidden items-center gap-4 py-8 pr-56 pl-8 md:grid md:grid-cols-2 lg:pr-64">
             <div>
               <div className="flex items-center gap-3">
                 <Image
@@ -139,7 +143,7 @@ export function HomeSections() {
               </div>
             </div>
 
-            <div className="py-1 md:py-0">
+            <div>
               <h3 className="font-display font-bold text-[#2b4a6b]">The stall</h3>
               <p className="mt-2 text-sm text-[#4d6a88]">
                 Add a canvas to the bag, check out here. I pack originals myself.
@@ -168,13 +172,13 @@ export function HomeSections() {
             </div>
           </div>
 
-          <div className="pointer-events-none absolute right-0 z-10 -top-16 h-52 w-36 sm:-top-24 sm:h-64 sm:w-40 md:top-auto md:bottom-0 md:h-[calc(100%+8rem)] md:w-56 lg:w-64">
+          <div className="pointer-events-none absolute right-0 bottom-0 z-10 hidden h-[calc(100%+8rem)] w-56 md:block lg:w-64">
             <Image
               src="/images/usagi.png"
               alt="Shopkeeper with a sketchbook and paintbrush"
               fill
               className="object-contain object-right-bottom"
-              sizes="(max-width: 768px) 10rem, 16rem"
+              sizes="16rem"
             />
           </div>
         </div>

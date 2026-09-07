@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useId, useState } from "react";
 
 export function NewsletterForm() {
   const [done, setDone] = useState(false);
+  const emailId = useId();
 
   if (done) {
     return <p className="mt-3 text-sm font-semibold text-blue-deep">You are on the list. Thank you.</p>;
@@ -11,17 +12,17 @@ export function NewsletterForm() {
 
   return (
     <form
-      className="mt-3 flex flex-col gap-2 sm:flex-row"
+      className="mt-3 flex min-w-0 flex-col gap-2 sm:flex-row"
       onSubmit={(e) => {
         e.preventDefault();
         setDone(true);
       }}
     >
-      <label className="sr-only" htmlFor="nl-email">
+      <label className="sr-only" htmlFor={emailId}>
         Email
       </label>
       <input
-        id="nl-email"
+        id={emailId}
         type="email"
         required
         placeholder="Your email"

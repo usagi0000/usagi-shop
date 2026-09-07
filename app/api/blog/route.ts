@@ -19,6 +19,8 @@ export async function POST(request: Request) {
 
   const slug = await uniqueSlug(title);
   const excerpt = excerptRaw || body.replace(/\s+/g, " ").slice(0, 160);
+  const imageRaw = String(formData.get("image") ?? "").trim();
+  const image = imageRaw.startsWith("/images/") ? imageRaw : undefined;
 
   await savePost({
     slug,
@@ -26,6 +28,7 @@ export async function POST(request: Request) {
     date: new Date().toISOString(),
     excerpt,
     body,
+    ...(image ? { image } : {}),
   });
 
   return Response.json({ ok: true, slug });
