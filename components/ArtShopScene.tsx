@@ -84,6 +84,28 @@ function FavoriteButton({
   );
 }
 
+function StallAddBtn({ product }: { product: Product }) {
+  const { add } = useCart();
+  const [done, setDone] = useState(false);
+  if (product.buyUrl || product.price <= 0) return null;
+
+  return (
+    <button
+      type="button"
+      className={styles.addCart}
+      onClick={(event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        add(product.slug);
+        setDone(true);
+        window.setTimeout(() => setDone(false), 1400);
+      }}
+    >
+      {done ? "In the bag ♡" : "Add to cart"}
+    </button>
+  );
+}
+
 function StallBuyNow({ product }: { product: Product }) {
   const { add } = useCart();
   const href = product.buyUrl ?? "/checkout";
@@ -421,7 +443,7 @@ export function ArtShopScene({ adamIcons }: { adamIcons: string[] }) {
 
   return (
     <div className={styles.stage}>
-      <div className={styles.wrap}>
+      <div className={`${styles.wrap} ${panelOpen ? styles.browseOpen : ""}`}>
       <Image
         src="/images/art-shop.png"
         alt="Art Shop stall"
@@ -432,6 +454,7 @@ export function ArtShopScene({ adamIcons }: { adamIcons: string[] }) {
         className={styles.shop}
         sizes="100vw"
       />
+      <div className={styles.shopDim} aria-hidden />
 
       <div className={styles.girlSlot}>
         <div className={styles.girl}>
@@ -624,6 +647,7 @@ export function ArtShopScene({ adamIcons }: { adamIcons: string[] }) {
                           label={`Favorite ${product.name}`}
                           onToggle={() => toggleLoved(product.slug)}
                         />
+                        <StallAddBtn product={product} />
                       </li>
                     );
                   })}
@@ -651,12 +675,23 @@ export function ArtShopScene({ adamIcons }: { adamIcons: string[] }) {
         </div>
       </section>
 
-      <Link href="/" className={styles.siteBubble} aria-label="Go to website">
+      <Link
+        href="/"
+        className={`${styles.siteBubble} ${panelOpen ? styles.siteBubbleHidden : ""}`}
+        aria-label="Go to website"
+      >
+        <span className={styles.siteBubbleMark} aria-hidden>
+          🌱
+        </span>
         Go to website
+        <span className={styles.siteBubbleArrow} aria-hidden>
+          {" "}
+          →
+        </span>
         <span className={styles.siteBubbleTail} aria-hidden />
       </Link>
 
-      <div className={styles.bunny}>
+      <div className={`${styles.bunny} ${panelOpen ? styles.bunnyHidden : ""}`}>
         <Image
           src="/images/Bunny1.png"
           alt=""

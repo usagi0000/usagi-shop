@@ -22,6 +22,10 @@
   object-fit: fill;
 }
 
+.shopDim {
+  display: none;
+}
+
 .girlSlot {
   position: absolute;
   left: 6.41%;
@@ -732,6 +736,10 @@
   fill: currentColor;
 }
 
+.addCart {
+  display: none;
+}
+
 .detail {
   display: grid;
   grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
@@ -1045,6 +1053,11 @@
   outline-offset: 3px;
 }
 
+.siteBubbleMark,
+.siteBubbleArrow {
+  display: none;
+}
+
 .siteBubbleTail {
   position: absolute;
   left: 50%;
@@ -1138,26 +1151,234 @@
 }
 
 @media (max-width: 720px) {
+  .wrap {
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    aspect-ratio: auto;
+  }
+
+  .shop {
+    object-fit: cover;
+    object-position: 52% 50%;
+    transition: filter 0.28s ease;
+  }
+
+  .shopDim {
+    display: block;
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: transparent;
+    transition: background 0.28s ease;
+  }
+
+  .girlSlot {
+    transition: none;
+  }
+
+  .browseOpen .shop {
+    filter: blur(10px) brightness(0.86) saturate(0.92);
+  }
+
+  .browseOpen .shopDim {
+    background: rgba(38, 24, 16, 0.22);
+  }
+
+  .girlSlot {
+    left: 2%;
+    top: auto;
+    bottom: 1.75rem;
+    width: 64%;
+    max-height: 49dvh;
+    z-index: 4;
+    transform: none;
+  }
+
+  .girl {
+    margin-top: 0;
+    width: 100%;
+  }
+
+  .girlBody {
+    width: 100%;
+    height: auto;
+    max-height: 49dvh;
+    object-fit: contain;
+    object-position: left bottom;
+  }
+
+  .welcomeBubble {
+    left: 51%;
+    right: auto;
+    top: auto;
+    bottom: calc(1.75rem + 37dvh);
+    width: auto;
+    max-width: 9.2rem;
+    min-height: 0;
+    padding: 0.5em 0.65em 0.55em;
+    font-size: 0.68rem;
+    white-space: normal;
+    z-index: 6;
+  }
+
+  .welcomeTail {
+    left: -0.28em;
+    right: auto;
+    top: 0.85em;
+    bottom: auto;
+    transform: rotate(134deg);
+  }
+
   .cardRow {
     left: 50%;
-    top: 31.8%;
-    width: 27.2%;
-    height: 40%;
-    gap: 4.5%;
+    right: auto;
+    top: auto;
+    bottom: calc(1.75rem + 49dvh - 0.75rem);
+    width: min(92%, 22.5rem);
+    height: auto;
+    align-items: flex-end;
+    gap: 0.5rem;
+    transform: translateX(-50%);
+    z-index: 5;
+  }
+
+  .cardRowHidden {
+    transform: translateX(-50%);
+  }
+
+  .catCard {
+    flex: 1 1 0;
+    width: 0;
+    height: auto;
+    aspect-ratio: 1;
+    overflow: hidden;
+  }
+
+  .catCardArt {
+    padding: 7% 6% 0;
+  }
+
+  .catCardImg {
+    width: 92%;
+    max-height: 100%;
+  }
+
+  .uiCardImg {
+    width: 100%;
+  }
+
+  .catCardLabel {
+    padding: 0.22em 0.15em 0.4em;
+    font-size: max(0.58rem, 10.5cqi);
   }
 
   .panel {
-    left: 28%;
-    width: 44%;
-    height: 48%;
+    left: 3.5%;
+    top: 6.5%;
+    z-index: 8;
+    width: 93%;
+    height: 74%;
+    padding: 0.7em 0.65em 0.55em;
+    transform: none;
+    transition: opacity 0.28s ease;
+  }
+
+  .panelHead {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 0.1em;
+  }
+
+  .panelBack {
+    position: relative;
+    top: 0;
+    left: 0;
+    align-self: flex-start;
+    margin-bottom: 0.35em;
+    min-height: 2.05rem;
+    padding: 0.32em 0.85em;
+    font-size: 0.82rem;
+  }
+
+  .panelBackWide {
+    font-size: 0.78rem;
+    padding: 0.32em 0.75em;
+    white-space: normal;
+    max-width: 100%;
+  }
+
+  .panelTitleRow {
+    padding: 0 0.4em;
+    min-height: 1.4em;
+  }
+
+  .panelTitle {
+    font-size: 1.05rem;
+  }
+
+  .panelSub {
+    font-size: 0.92rem;
   }
 
   .catalogGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.85em 0.55em;
   }
 
   .iconCatalog {
-    grid-template-columns: minmax(8.4em, 11.2em);
+    grid-template-columns: minmax(0, 1fr);
+    padding-top: 0.2em;
+  }
+
+  .productName {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    font-size: 0.78rem;
+  }
+
+  .productPrice {
+    font-size: 0.74rem;
+  }
+
+  .productMeta {
+    padding: 0.4em 0.15em 0.15em;
+  }
+
+  .addCart {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 1.85rem;
+    margin-top: 0.28em;
+    padding: 0.28em 0.4em;
+    border: 0;
+    border-radius: 999px;
+    background: #f29c91;
+    color: #fff;
+    font-family: var(--font-quicksand), var(--font-nunito), ui-sans-serif, sans-serif;
+    font-size: 0.68rem;
+    font-weight: 700;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .addCart:active {
+    transform: scale(0.96);
+  }
+
+  .favBtn {
+    top: 0.15em;
+    right: 0.1em;
+    bottom: auto;
+    width: 1.7em;
+    height: 1.7em;
+    z-index: 2;
   }
 
   .detail {
@@ -1165,20 +1386,248 @@
     gap: 0.45em;
   }
 
-  .panelBackWide {
+  .siteBubble {
+    top: auto;
+    left: auto;
+    right: 3.2%;
+    bottom: max(0.85rem, env(safe-area-inset-bottom));
+    z-index: 6;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.12em;
+    box-sizing: border-box;
+    width: 4.7rem;
+    height: 4.7rem;
+    min-height: 0;
+    padding: 0.35em 0.3em;
+    border-radius: 1.05em;
+    border-color: #e07870;
+    background: #f29c91;
+    color: #fff;
     font-size: 0.58rem;
-    padding: 0.14em 0.45em 0.16em;
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: 0;
+    text-align: center;
+    white-space: normal;
+    box-shadow: 0 0.18em 0.45em rgba(92, 58, 32, 0.16);
+    animation: none;
+    transform: none;
   }
 
-  .siteBubble {
+  .siteBubbleMark {
+    display: none;
+  }
+
+  .siteBubbleArrow {
+    display: inline;
+  }
+
+  .siteBubbleTail {
+    display: none;
+  }
+
+  .siteBubbleHidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .bunny {
+    left: auto;
+    right: 4%;
+    bottom: calc(5.5rem + 14dvh);
+    width: 26%;
+    z-index: 3;
+  }
+
+  .bunnyHidden {
+    opacity: 0;
+  }
+
+  .browseOpen .girlSlot {
+    left: 69%;
+    top: 1%;
+    bottom: auto;
+    width: 28%;
+    max-height: 17.5dvh;
+    z-index: 12;
+    transform: none;
+  }
+
+  .browseOpen .girlBody {
+    max-height: 17.5dvh;
+    object-position: center bottom;
+  }
+
+  .browseOpen .panel {
+    left: 5%;
+    top: 15.2%;
+    z-index: 8;
+    width: 90%;
+    height: calc(100% - 15.2% - 2.7rem);
+    padding: 0.55em 0.5em 0.45em;
+    border: 5px solid #e59a8d;
+    border-radius: 1.45em 1.6em 1.3em 1.45em;
+    background:
+      repeating-linear-gradient(
+        -18deg,
+        transparent,
+        transparent 11px,
+        rgba(184, 146, 96, 0.03) 12px
+      ),
+      #fff6e8;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.72),
+      0 0.45em 1.2em rgba(42, 24, 16, 0.28);
+  }
+
+  .browseOpen .panel::after {
+    inset: 0.42em;
+    border-color: rgba(229, 154, 141, 0.35);
+  }
+
+  .browseOpen .panelHead {
+    padding: 0.05em 0.2em 0.3em;
+  }
+
+  .browseOpen .panelTitleRow {
+    padding: 0 0.2em;
+  }
+
+  .browseOpen .panelTitle {
+    font-size: 0.98rem;
+  }
+
+  .browseOpen .panelSub {
+    font-size: 0.82rem;
+  }
+
+  .browseOpen .panelBack {
+    min-height: 1.85rem;
+    padding: 0.26em 0.75em;
+    font-size: 0.76rem;
+  }
+
+  .browseOpen .boardFace {
+    padding: 0.08em 0.28em 0.35em 0.12em;
+  }
+
+  .browseOpen .catalogGrid,
+  .browseOpen .iconCatalog {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.42em 0.32em;
+    padding: 0.05em 0.05em 0.15em;
+    justify-content: stretch;
+  }
+
+  .browseOpen .productArt {
+    border-radius: 0.55em;
+  }
+
+  .browseOpen .productMeta {
+    gap: 0.12em;
+    padding: 0.28em 0.05em 0.05em;
+  }
+
+  .browseOpen .productName {
     font-size: 0.58rem;
-    padding: 0.3em 0.55em 0.34em;
+    line-height: 1.15;
+    -webkit-line-clamp: 2;
+  }
+
+  .browseOpen .productPrice {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    align-self: stretch;
+    min-height: 1.35rem;
+    padding: 0.12em 0.35em;
+    border-radius: 999px;
+    background: #f29c91;
+    color: #fff;
+    font-size: 0.58rem;
+    font-weight: 700;
+  }
+
+  .browseOpen .addCart {
+    display: none;
+  }
+
+  .browseOpen .favBtn {
+    top: 0.08em;
+    right: 0.04em;
+    width: 1.25em;
+    height: 1.25em;
+  }
+
+  .browseOpen .detail {
+    gap: 0.35em;
+  }
+}
+
+@media (max-width: 359px) {
+  .girlSlot {
+    left: 1.5%;
+    width: 68%;
+    bottom: 1.5rem;
+    max-height: 45dvh;
+  }
+
+  .girlBody {
+    max-height: 45dvh;
+  }
+
+  .cardRow {
+    bottom: calc(1.5rem + 45dvh - 0.7rem);
+    height: auto;
+    width: min(92%, 21rem);
+  }
+
+  .bunny {
+    bottom: calc(5.2rem + 12dvh);
+    width: 28%;
   }
 
   .welcomeBubble {
-    font-size: 0.5rem;
-    padding: 0.48em 0.55em 0.58em 0.6em;
-    min-height: 4.3em;
+    left: 53%;
+    bottom: calc(1.5rem + 34dvh);
+    font-size: 0.58rem;
+    max-width: 8.4rem;
+  }
+
+  .siteBubble {
+    width: 4.3rem;
+    height: 4.3rem;
+    font-size: 0.52rem;
+    right: 2.5%;
+  }
+
+  .panel {
+    height: 72%;
+  }
+
+  .browseOpen .girlSlot {
+    left: 67%;
+    top: 0.6%;
+    bottom: auto;
+    width: 30%;
+    max-height: 16dvh;
+  }
+
+  .browseOpen .girlBody {
+    max-height: 16dvh;
+  }
+
+  .browseOpen .panel {
+    top: 14.5%;
+    height: calc(100% - 14.5% - 2.4rem);
+  }
+
+  .browseOpen .productName,
+  .browseOpen .productPrice {
+    font-size: 0.52rem;
   }
 }
 
@@ -1205,8 +1654,15 @@
   .catCardImg,
   .cardRow,
   .panel,
-  .boardSlide {
+  .boardSlide,
+  .shop,
+  .shopDim,
+  .girlSlot {
     transition: none;
+  }
+
+  .browseOpen .shop {
+    transform: none;
   }
 
   .collageCard .collageCell {
@@ -1223,6 +1679,12 @@
 
   .catCard:hover .catCardImg,
   .catCard:active .catCardImg {
+    transform: none;
+  }
+}
+
+@media (max-width: 720px) and (prefers-reduced-motion: reduce) {
+  .siteBubble {
     transform: none;
   }
 }
