@@ -6,7 +6,7 @@ export function HeroStall() {
   return (
     <section className={styles.hero}>
       <Image
-        src="/images/header3.png"
+        src="/images/header3.jpg"
         alt=""
         fill
         preload

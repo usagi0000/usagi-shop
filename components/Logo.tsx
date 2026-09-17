@@ -11,8 +11,8 @@ export function Logo({
     <Image
       src="/images/logo.png"
       alt="Usagi Art"
-      width={980}
-      height={1111}
+      width={452}
+      height={512}
       className={className}
       preload={preload}
     />

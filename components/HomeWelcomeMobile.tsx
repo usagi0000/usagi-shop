@@ -27,8 +27,8 @@ export function HomeWelcomeMobile() {
             <Image
               src="/images/logo1.png"
               alt=""
-              width={851}
-              height={1051}
+              width={415}
+              height={512}
               className={styles.bunny}
             />
             <h2 className={styles.title}>Welcome ♡</h2>
@@ -77,8 +77,8 @@ export function HomeWelcomeMobile() {
           <Image
             src="/images/logo1.png"
             alt=""
-            width={851}
-            height={1051}
+            width={415}
+            height={512}
             className={styles.stallBunny}
           />
         </div>

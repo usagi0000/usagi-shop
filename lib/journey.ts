@@ -37,7 +37,7 @@ export const JOURNEY_SECTIONS: JourneySection[] = [
       },
       {
         slug: "dragon-maid-page",
-        src: "/images/blog/large-scan.png",
+        src: "/images/blog/large-scan.jpg",
         title: "Dragon Maid sketches",
         category: "Traditional Art · Marker",
         dateLabel: "April 2020",

@@ -118,8 +118,8 @@ export function HomeSections() {
                 <Image
                   src="/images/logo1.png"
                   alt=""
-                  width={851}
-                  height={1051}
+                  width={415}
+                  height={512}
                   className="h-14 w-auto shrink-0"
                 />
                 <div>
@@ -221,8 +221,8 @@ function WhyIcon({ name }: { name: string }) {
     <Image
       src="/images/logo1.png"
       alt=""
-      width={851}
-      height={1051}
+      width={415}
+      height={512}
       className="mx-auto h-12 w-auto"
     />
   );

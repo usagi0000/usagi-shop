@@ -67,7 +67,7 @@ export const products: Product[] = [
     slug: "graceful-goose",
     name: "Graceful Goose",
     price: 20,
-    image: "/images/goose-easel.png",
+    image: "/images/goose-easel.jpg",
     gallery: ["/images/goose-held.jpg"],
     category: "original-art",
     collection: "animals",

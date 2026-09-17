@@ -18,16 +18,16 @@ const EYE_FILES: Record<
   Record<EyeSide, { src: string; w: number; h: number }>
 > = {
   open: {
-    L: { src: "/images/eye-l-open.png?v=2", w: 579, h: 579 },
-    R: { src: "/images/eye-r-open.png?v=2", w: 543, h: 543 },
+    L: { src: "/images/eye-l-open.png?v=3", w: 256, h: 256 },
+    R: { src: "/images/eye-r-open.png?v=3", w: 256, h: 256 },
   },
   demi: {
-    L: { src: "/images/eye-l-demi.png?v=2", w: 718, h: 718 },
-    R: { src: "/images/eye-r-demi.png?v=2", w: 671, h: 671 },
+    L: { src: "/images/eye-l-demi.png?v=3", w: 256, h: 256 },
+    R: { src: "/images/eye-r-demi.png?v=3", w: 256, h: 256 },
   },
   closed: {
-    L: { src: "/images/eye-l-closed.png?v=2", w: 721, h: 253 },
-    R: { src: "/images/eye-r-closed.png?v=2", w: 674, h: 307 },
+    L: { src: "/images/eye-l-closed.png?v=3", w: 256, h: 90 },
+    R: { src: "/images/eye-r-closed.png?v=3", w: 256, h: 117 },
   },
 };
 
@@ -567,7 +567,7 @@ export function ArtShopScene({ adamIcons }: { adamIcons: string[] }) {
         className={`${styles.wrap} ${panelOpen ? styles.browseOpen : ""}`}
       >
       <Image
-        src="/images/art-shop.png"
+        src="/images/art-shop.jpg"
         alt="Art Shop stall"
         width={1681}
         height={936}
